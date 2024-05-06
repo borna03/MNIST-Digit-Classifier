@@ -11,7 +11,7 @@ def load_and_normalize_data():
     x_train = tf.keras.utils.normalize(x_train, axis=1)
     x_test = tf.keras.utils.normalize(x_test, axis=1)
     
-    # Return a single example image and label
+    # Single example image and label
     single_image = x_train[0]
     single_label = y_train[0]
     
@@ -19,7 +19,7 @@ def load_and_normalize_data():
 
 
 def build_and_compile_model():
-    # Build a sequential model
+    # Sequential model
     model = tf.keras.models.Sequential([
         tf.keras.layers.Flatten(input_shape=(28, 28)),
         tf.keras.layers.Dense(128, activation='relu'),
@@ -69,17 +69,15 @@ def plot_single_image(image, label):
 
 if __name__ == '__main__':
     (x_train, y_train), (x_test, y_test), (single_image, single_label) = load_and_normalize_data()
-    # model = build_and_compile_model()
-    # history = train_and_evaluate_model(model, x_train, y_train, x_test, y_test)
-    # plot_metrics(history)
-    # model.save('handwritten.keras')  # Save the model once after training
+    model = build_and_compile_model()
+    history = train_and_evaluate_model(model, x_train, y_train, x_test, y_test)
+    plot_metrics(history)
+    model.save('model/handwritten.keras')  # Save the model once after training
 
     # plot_single_image(single_image, single_label)
     # Adjust numpy print options
-    np.set_printoptions(linewidth=np.inf)
-    
-    # Print the entire image matrix on one line
-    print(single_image)
+    # np.set_printoptions(linewidth=np.inf)
+    # print(single_image)
 
 
 

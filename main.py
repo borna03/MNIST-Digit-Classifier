@@ -5,13 +5,13 @@ import matplotlib.pyplot as plt
 import tensorflow as tf
 import pygame
 from Button import Button
-import random  # Import random library at the beginning of your file
+import random 
 
 bkColor = (21, 21, 21)
 
 screenW, screenH = 1200, 800
 screen = pygame.display.set_mode((screenW, screenH))
-pygame.display.set_caption('Snake game')
+pygame.display.set_caption('MNIST')
 screen.fill(bkColor)
 pygame.display.flip()
 
@@ -54,7 +54,7 @@ def returnPos(x, y, gap, margX, margY):
     return y, x
 
 
-model = tf.keras.models.load_model('handwritten.keras')
+model = tf.keras.models.load_model('model/handwritten.keras')
 #
 # img = cv2.imread(f'testpicture.png')[:, :, 0]
 # img = np.invert(np.array([img]))
@@ -62,8 +62,7 @@ model = tf.keras.models.load_model('handwritten.keras')
 def normalize_input(grid):
     # Normalize the grid to be between 0 and 1
     normalized_grid = np.array(grid) / 255.0
-    return normalized_grid  # Reshape for the model if needed
-
+    return normalized_grid 
 
 run = True
 a = [[], [], []]
@@ -82,7 +81,7 @@ while run:
                 arr = np.array(arr)
                 pnormalized_array = normalize_input(arr)
                 np.set_printoptions(linewidth=np.inf)
-                
+
                 prediction = model.predict(pnormalized_array)
                 EvaluatedNumber.text = f'{np.argmax(prediction)}'
 

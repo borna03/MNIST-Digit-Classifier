@@ -1,1 +1,0 @@
-random_gray_value
